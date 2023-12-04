@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var inputTemperatur = 0.0
-    @State private var selectedUnit: String = ""
+    @State private var inputTemperatur = 20.0
+    @State private var selectedUnit: String = "C"
     
     var kel: Double {
         var tempInKelvin = 1.0
@@ -60,27 +60,31 @@ struct ContentView: View {
     let tempUnits = ["C", "F", "K"]
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Temperautr", value: $inputTemperatur, format: .number)
-                
-                Picker("Temperatur Unit", selection: $selectedUnit
-                ) {
-                    ForEach(tempUnits, id: \.self) {
-                        Text($0)
+        NavigationStack{
+            Form {
+                Section("Enter your temperature and unit") {
+                    TextField("Temperautr", value: $inputTemperatur, format: .number)
+                    
+                    Picker("Temperatur Unit", selection: $selectedUnit
+                    ) {
+                        ForEach(tempUnits, id: \.self) {
+                            Text($0)
+                        }
                     }
+                    .pickerStyle(.segmented)
                 }
-                .pickerStyle(.segmented)
+                Section {
+                    
+                    Text("\(cel, specifier: "%.1f") C")
+                    Text("\(far, specifier: "%.1f") F")
+                    Text("\(kel, specifier: "%.2f") K")
+                    
+                }
+                .padding()
             }
-            Section {
-                
-                Text("\(cel, specifier: "%.1f") C")
-                Text("\(far, specifier: "%.1f") F")
-                Text("\(kel, specifier: "%.2f") K")
-                
-            }
-            .padding()
+            .navigationTitle("Temperatur Converter")
         }
+        
     }
 }
 
