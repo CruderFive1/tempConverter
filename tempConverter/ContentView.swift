@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var kel: Double {
         var tempInKelvin = 1.0
-        
+        //TEST
         
         if selectedUnit == "F" {
             tempInKelvin = (inputTemperatur - 32) * 5/9 + 273.15
